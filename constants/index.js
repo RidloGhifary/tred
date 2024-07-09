@@ -16,7 +16,7 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/assets/create.svg",
-    route: "/create",
+    route: "/create-tred",
     label: "Create",
   },
   // {
