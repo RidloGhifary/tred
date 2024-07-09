@@ -20,7 +20,7 @@ const tredSchema = new mongoose.Schema({
   children: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Thread",
+      ref: "Tred",
     },
   ],
 });

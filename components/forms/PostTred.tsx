@@ -16,7 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ThreadValidation } from "@/lib/validations/tred";
-import { createThread } from "@/lib/actions/tred.action";
+import { createTred } from "@/lib/actions/tred.action";
 
 export default function PostTred({ userId }: { userId: string }) {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function PostTred({ userId }: { userId: string }) {
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-    await createThread({
+    await createTred({
       text: values.tred,
       author: userId,
       path: pathname,
@@ -64,7 +64,7 @@ export default function PostTred({ userId }: { userId: string }) {
         <Button
           type="submit"
           className="bg-primary-500 hover:bg-primary-500/70">
-          Post Thread
+          Post tred
         </Button>
       </form>
     </Form>
