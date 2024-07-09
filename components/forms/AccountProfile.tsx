@@ -1,8 +1,9 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { ChangeEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { z } from "zod";
 
@@ -20,7 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { UserValidation } from "@/lib/validations/user";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
-import { usePathname, useRouter } from "next/navigation";
+import { updateUser } from "@/lib/actions/user.action";
 
 interface Props {
   user: {
@@ -61,21 +62,21 @@ export default function AccountProfile({ user, btnTitle }: Props) {
       if (imgRes && imgRes[0].url) {
         values.profile_photo = imgRes[0].url;
       }
+    }
 
-      // await updateUser({
-      //   name: values.name,
-      //   path: pathname,
-      //   username: values.username,
-      //   userId: user.id,
-      //   bio: values.bio,
-      //   image: values.profile_photo,
-      // });
+    await updateUser({
+      userId: user.id,
+      username: values.username,
+      name: values.name,
+      bio: values.bio,
+      image: values.profile_photo,
+      path: pathname,
+    });
 
-      // if (pathname === "/profile/edit") {
-      //   router.back();
-      // } else {
-      //   router.push("/");
-      // }
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
     }
   };
 
@@ -204,7 +205,9 @@ export default function AccountProfile({ user, btnTitle }: Props) {
           )}
         />
 
-        <Button type="submit" className="bg-primary-500">
+        <Button
+          type="submit"
+          className="bg-primary-500 hover:bg-primary-500/70">
           {btnTitle}
         </Button>
       </form>
