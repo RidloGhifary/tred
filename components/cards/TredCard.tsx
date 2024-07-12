@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// import DeleteThread from "../forms/DeleteThread";
+import DeleteTred from "../forms/DeleteTred";
 
 interface Props {
   id: string;
@@ -112,28 +112,17 @@ export default function TredCard({
           </div>
         </div>
 
-        {/* <DeleteThread
-          threadId={JSON.stringify(id)}
+        <DeleteTred
+          tredId={JSON.stringify(id)}
           currentUserId={currentUserId}
           authorId={author.id}
           parentId={parentId}
           isComment={isComment}
-        /> */}
+        />
       </div>
 
       {!isComment && comments.length > 0 && (
         <div className="ml-1 mt-3 flex items-center gap-2">
-          {comments.slice(0, 2).map((comment, index) => (
-            <Image
-              key={index}
-              src={comment.author.image}
-              alt={`user_${index}`}
-              width={24}
-              height={24}
-              className={`${index !== 0 && "-ml-5"} rounded-full object-cover`}
-            />
-          ))}
-
           <Link href={`/tred/${id}`}>
             <p className="mt-1 text-subtle-medium text-gray-1">
               {comments.length} repl{comments.length > 1 ? "ies" : "y"}
